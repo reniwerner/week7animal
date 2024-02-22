@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        <li>Stella</li>
+        <li>Cody</li>
+        <li>Mango</li>
+        <li>Lucy</li>
+        <li>Buhmie</li>
+    </ol>
+    <p>
+        <label for="petNum">Pet Number:</label>
+        <input type="text" id="petNum" name="petNum" maxlength="4" size="4">
+        <button onclick="showInfo()">Click for information</button>
+    </p>
+    <div class="selectedPetInfo"></div>
+    <div id="imageContainer"></div>
+
+    <script>
+        const petsData = [
+            {
+                petName: "Stella",
+                age: 7,
+                weightInKilos: 24,
+                breed: "Dalmation",
+                imageUrl: "download1.jpg"
+            },
+            {
+                petName: "Cody",
+                age: 8,
+                weightInKilos: 22,
+                breed: "Corgi",
+                imageUrl: "download2.jpg"
+            },
+            {
+                petName: "Mango",
+                age: 2,
+                weightInKilos: 11,
+                breed: "Persian",
+                imageUrl: "download3.jpg"
+            },
+            {
+                petName: "Lucy",
+                age: 4,
+                weightInKilos: 35,
+                breed: "Ball Python",
+                imageUrl: "download4.jpg"
+            },
+            {
+                petName: "Buhmie",
+                age: 1,
+                weightInKilos: 28,
+                breed: "Bull-dog",
+                imageUrl: "download5.jpg"
+            }
+        ];
+
+        function showInfo() {
+            let userInput = document.getElementById('petNum').value;
+            let index = parseInt(userInput) - 1;
+
+            let selectedPetInfo = document.querySelector('.selectedPetInfo');
+            let imageContainer = document.getElementById("imageContainer");
+
+            if (index >= 0 && index < petsData.length) {
+                selectedPetInfo.innerHTML = `
+                    <p>${petsData[index].petName} the ${petsData[index].breed} is ${petsData[index].age} years old and weighs ${petsData[index].weightInKilos} kilos.</p>
+                `;
+                
+                let imageUrl = petsData[index].imageUrl;
+                let imageElement = document.createElement("img");
+                imageElement.src = imageUrl;
+                imageElement.alt = petsData[index].petName;
+
+                imageContainer.innerHTML = "";
+                imageContainer.appendChild(imageElement);
+            } else {
+                selectedPetInfo.innerHTML = "<p>Invalid option</p>";
+                imageContainer.innerHTML = "";
+            }
+        }
+    </script>
+</body>
+</html>
